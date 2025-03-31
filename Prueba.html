@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva tu Cita - [Nombre de tu Barbería]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2d3436;
+            --accent-color: #e74c3c;
+            --light-bg: #919196;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--light-bg);
+        }
+
+        .reserva-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgb(29,233,233);
+            background: linear-gradient(355deg, rgba(29,233,233,1) 6%, rgba(84,92,92,1) 53%, rgba(245,1,36,0.972926051051051) 96%);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2.5em;
+        }
+
+        .form-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .servicio-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .servicio-option:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .servicio-option.selected {
+            border-color: var(--accent-color);
+            background: #ffe8e6;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .time-slot {
+            padding: 10px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-slot:hover {
+            border-color: var(--accent-color);
+        }
+
+        .time-slot.selected {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        button[type="submit"] {
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .reserva-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="reserva-container">
+        <h2><i class="fas fa-calendar-alt"></i> Reserva tu Cita</h2>
+        
+        <form id="reservaForm" action="https://formspree.io/f/xwplnayk" method="POST">
+            <!-- Sección Información Personal -->
+            <div class="form-section">
+                <div class="input-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+
+            <!-- Sección Servicios -->
+            <div class="form-section">
+                <div class="input-group">
+                    <label>Servicios</label>
+                    <div class="servicios-grid">
+                        <div class="servicio-option">
+                            <input type="checkbox" id="corte" name="servicios[]" value="Corte Clásico">
+                            <label for="corte">Corte de cabello</label>
+                        </div>
+                        <div class="servicio-option">
+                            <input type="checkbox" id="barba" name="servicios[]" value="Arreglo de Barba">
+                            <label for="barba">Recorte de Barba</label>
+                        </div>
+                        <div class="servicio-option">
+                            <input type="checkbox" id="Afeitado" name="servicios[]" value="Afeitado">
+                            <label for="Afeitado">Afeitado</label>
+                        </div>
+                        <div class="servicio-option">
+                            <input type="checkbox" id="Tinte de cabello" name="servicios[]" value="Tinte de cabello">
+                            <label for="Tinte de Cabello">Tinte de Cabello</label>
+                        </div>
+                        <div class="servicio-option">
+                            <input type="checkbox" id="Bigote" name="servicios[]" value="Bigote">
+                            <label for="Bigote">Bigote</label>
+                        </div>
+                        <div class="servicio-option">
+                            <input type="checkbox" id="Arreglo de Cejas" name="servicios[]" value="Arreglo de Cejas">
+                            <label for="Arreglo de Cejas">Arreglo de Cejas</label>
+                        </div>
+                        <!-- Agrega más servicios aquí -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Fecha y Hora -->
+            <div class="form-section">
+                <div class="input-group">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>Hora</label>
+                    <div class="time-slots">
+                        <div class="time-slot">09:00 AM</div>
+                        <div class="time-slot">09:30 AM</div>
+                        <div class="time-slot">10:00 AM</div>
+                        <div class="time-slot">10:30 AM</div>
+                        <div class="time-slot">11:00 AM</div>
+                        <div class="time-slot">11:30 AM</div>
+                        <div class="time-slot">12:00 AM</div>
+                        <div class="time-slot">12:30 AM</div>
+                        <div class="time-slot">13:00 AM</div>
+                        <div class="time-slot">13:30 AM</div>
+                        <div class="time-slot">14:00 AM</div>
+                        <div class="time-slot">14:30 AM</div>
+                        <div class="time-slot">15:00 AM</div>
+                        <div class="time-slot">15:30 AM</div>
+                        <div class="time-slot">16:00 AM</div>
+                        <div class="time-slot">16:30 AM</div>
+                        <div class="time-slot">17:00 AM</div>
+                        <div class="time-slot">17:30 AM</div>
+                        <div class="time-slot">18:00 AM</div>
+                        <!-- Agrega más horarios -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Barberos -->
+            <div class="form-section">
+                <div class="input-group">
+                    <label for="barbero">Preferencia de Barbero</label>
+                    <select id="barbero" name="barbero">
+                        <option value="cualquiera">Cualquier Barbero</option>
+                        <option value="barbero1">Michael Perez Laureano</option>
+                        <option value="barbero2">Michael Perez Laureano</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Sección Comentarios -->
+            <div class="form-section">
+                <div class="input-group">
+                    <label for="comentarios">Comentarios Especiales</label>
+                    <textarea id="comentarios" name="comentarios" rows="4"></textarea>
+                </div>
+            </div>
+            <input type="hidden" name="_subject" value="Nueva Reserva - Barbería">
+            <input type="hidden" name="_replyto" value="tuemail@barberia.com">
+            <input type="hidden" name="_language" value="es">
+            <button type="submit">Confirmar Reserva <i class="fas fa-check"></i></button>
+        </form>
+        <input type="hidden" name="_next" value="https://tudominio.com/gracias.html">
+    </div>
+
+    <script>
+        // Script para manejar la selección de horarios
+        document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.addEventListener('click', function() {
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+                document.querySelector('#hora').value = this.textContent;
+            });
+        });
+
+        // Script para servicios seleccionados
+        document.querySelectorAll('.servicio-option').forEach(service => {
+            service.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                const checkbox = this.querySelector('input[type="checkbox"]');
+                checkbox.checked = !checkbox.checked;
+            });
+        });
+    </script>
+
+    <!-- Para enviar a correo, puedes usar servicios como:
+         1. Formspree (https://formspree.io/)
+         2. EmailJS (https://www.emailjs.com/)
+         3. Netlify Forms (si usas Netlify)
+         
+         Ejemplo con Formspree:
+         1. Registrate en Formspree
+         2. Reemplaza TU_ENDPOINT_DE_CORREO con tu endpoint
+         3. Agrega input type="hidden" name="_next" value="URL_GRACIAS"
+    -->
+</body>
+</html>
